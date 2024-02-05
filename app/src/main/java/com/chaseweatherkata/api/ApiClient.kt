@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.Response as OkHttpResponse
 
-object RetrofitClient {
+object OpenWeatherApiClient {
     private const val BASE_WEATHER_URL = "https://api.openweathermap.org/"
 
     private val client = OkHttpClient.Builder().addInterceptor(RequestInterceptor).build()
@@ -52,7 +52,7 @@ class ApiClient {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 val body = response.body()
                 if (!response.isSuccessful || body == null) {
-                    onError(Error("Response was unsuccessful"))
+                    onError(Error("Request was unsuccessful"))
                     return
                 }
 
@@ -66,7 +66,7 @@ class ApiClient {
     }
 
     private val weatherApiService: WeatherApiService by lazy {
-        RetrofitClient.retrofit.create(WeatherApiService::class.java)
+        OpenWeatherApiClient.retrofit.create(WeatherApiService::class.java)
     }
 
     fun getWeatherDataForCity(

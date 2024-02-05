@@ -25,6 +25,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
+// more tests need added to the project; wanted to get at least 1 file tested well under the time constraints
 class SearchViewModelTest {
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()

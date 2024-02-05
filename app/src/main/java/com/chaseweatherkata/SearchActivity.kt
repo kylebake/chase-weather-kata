@@ -21,7 +21,7 @@ import com.chaseweatherkata.ui.SearchViewModel
 import com.chaseweatherkata.ui.SearchViewModelFactory
 import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
     private lateinit var binding: MainBinding
     private lateinit var searchViewModel: SearchViewModel
     private val dataStore by lazy { DataStoreSearch(this) }
@@ -37,10 +37,6 @@ class MainActivity : AppCompatActivity() {
                 getCurrentLocation()
             }
         }
-
-    private fun retrieveWeatherForCity(city: String) {
-        searchViewModel.retrieveWeatherForCity(city)
-    }
 
     private fun setupView() {
         binding = MainBinding.inflate(layoutInflater)
@@ -74,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
         dataStore.readCity.asLiveData().observe(this) { city ->
             binding.searchCity.setText(city)
-            retrieveWeatherForCity(city)
+            searchViewModel.retrieveWeatherForCity(city)
         }
     }
 
@@ -84,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         builder.setMessage(message)
     }
 
+    // given more time, i'd move this function to a more suitable location away from the activity
     private fun getCurrentLocation(): Boolean {
         val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -104,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (city.isNullOrEmpty()) return@requestSingleUpdate
 
-                retrieveWeatherForCity(city)
+                searchViewModel.retrieveWeatherForCity(city)
             }, null
         )
 
@@ -123,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
             if (city.isEmpty()) return@setOnClickListener
 
-            retrieveWeatherForCity(city)
+            searchViewModel.retrieveWeatherForCity(city)
         }
     }
 
