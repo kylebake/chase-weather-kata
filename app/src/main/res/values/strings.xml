@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ChaseWeatherKata</string>
+    <string name="get_weather">Get Weather</string>
+    <string name="temperature_label">Temperature</string>
+    <string name="feels_like_label">Feels like</string>
+    <string name="city">City</string>
+    <string name="temperature">%1$.1f\u00B0F</string>
+    <string name="humidity">%d%%</string>
+    <string name="weather_conditions">Weather conditions</string>
+    <string name="humidity_label">Humidity</string>
+</resources>
